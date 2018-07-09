@@ -1,0 +1,26 @@
+.widgetMain {
+    width: 60%;
+    margin: 2% auto;
+}
+.widgetMain h2 {
+    float: left;
+    margin: 0;
+}
+.imageRight {
+    float: right;
+}
+.clearfix{
+    clear: both;
+}
+.formCars {
+    margin-top: 20px;
+}
+select.selectCity {
+    width: 35%;
+    padding: 1%;
+    border: 0;
+    box-shadow: 0 0 15px 2px rgba(221, 221, 221, 1);
+}
+.cityValue {
+    /*display: none;*/
+}
