@@ -1,26 +1,264 @@
-.widgetMain {
-    width: 60%;
+body {
+    font-family: Verdana, sans-serif;
+}
+h2, .h2 {
+    font-weight: bold;
+    font-size: 16px;
+    color: #1e272c;
+}
+.border-form {
+   /* border: 20px solid #384458;*/
+}
+.widget-main {
+    position: relative;
+    width: 960px;
     margin: 2% auto;
 }
-.widgetMain h2 {
+.widget-main h2 {
     float: left;
     margin: 0;
 }
-.imageRight {
+.float-right {
     float: right;
+}
+.logo {
+    width: 160px;
+    height: 30px;
+    background: url("./img/logo.png") 80% 100% no-repeat;
+    background-size: contain;
 }
 .clearfix{
     clear: both;
 }
-.formCars {
+.container-select-city, .container-select-calendar {
+    display: inline;
+}
+.form-cars {
     margin-top: 20px;
 }
-select.selectCity {
-    width: 35%;
+.down {
+    background: white url("./img/down-arrow.jpg") 100% 55% no-repeat;
+    width: 3%;
+    height: 20px;
+    float: right;
+    background-size: contain;
+}
+.up {
+    background: white url("./img/up-arrow.jpg") 100% 55% no-repeat;
+    width: 3%;
+    height: 20px;
+    float: right;
+    background-size: contain;
+}
+.select-city, .select-calendar {
+    display: inline-block;
+    width: 38%;
+    height: 20px;
     padding: 1%;
     border: 0;
+    border-radius: 5px;
     box-shadow: 0 0 15px 2px rgba(221, 221, 221, 1);
 }
-.cityValue {
-    /*display: none;*/
+.select-calendar {
+    margin: 0 2%;
+}
+.city-value, .calendar-value {
+    position: absolute;
+    width: 40%;
+    height: auto;
+    overflow: hidden;
+    background-color: transparent;
+}
+.city-value .fragment, .calendar-value .fragment {
+    height:180px;
+    padding-bottom: 10px;
+    margin-top: 3px;
+    overflow-y: scroll;
+    background-color: white;
+    border-radius: 3px;
+}
+.fragment::-webkit-scrollbar {
+    width: 5px;
+}
+.fragment::-webkit-resizer {
+    width: 5px;
+}
+.fragment::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: lightgrey;
+}
+.city-value .fragment div p {
+    margin: 0;
+    padding: 10px 0 7px 10px;
+}
+.city-value .fragment div p:hover {
+    color: #49ffb9;
+}
+.calendar-value {
+    left: 42%;
+}
+.none {
+    display: none;
+}
+.button-find {
+    display: inline-block;
+    background-color: #239cd3;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 12px 55px;
+    border-radius: 2px;
+}
+.small-text {
+    color: #bcb5c2;
+    font-size: 13px;
+}
+.example-car > div {
+    display: inline-block;
+    width: 19%;
+    padding-left: 1%;
+}
+.example-car > div:nth-child(2) {
+    padding-left: 0;
+}
+.itemCar {
+    font-size: 13px;
+    font-family: Verdana, sans-serif;
+    color: grey;
+    box-shadow: 0 0 15px 1px rgba(236, 236, 237, 1);
+}
+.itemCar p {
+    margin: 2px 0;
+}
+.itemCar img {
+    width: 100%;
+}
+.price {
+    margin-top: 10px;
+    font-size: 23px;
+    font-weight: bold;
+    color: #1e272c;
+}
+.oldPrice {
+    text-decoration: line-through;
+}
+.priceDay {
+    margin-left: 5px;
+    color: black;
+    font-size: 15px;
+}
+.description {
+    padding: 10px;
+}
+.bottom-text {
+    text-align: center;
+}
+.bottom-blue-text {
+    margin: 20px 0;
+    color: #239cd3;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+@media (max-width: 940px) {
+    .widget-main {
+        width: 100%;
+        margin: 2% auto;
+    }
+    .logo {
+        width: 120px;
+        height: 35px;
+        background: url("./img/smallogo.png") 100% 100% no-repeat;
+    }
+    .example-car > div:nth-child(6), .example-car > div:nth-child(5) {
+        display: none;
+    }
+    .button-find {
+        width: 26%;
+    }
+    .select-city, .select-calendar {
+        width: 33%;
+    }
+    .example-car > div {
+        width: 32%;
+    }
+    .city-value {
+        width: 35%;
+    }
+}
+@media (max-width: 560px) {
+    .widget-main {
+        margin: 20px 0 0 20px;
+    }
+    .example-car > div:nth-child(4) {
+        display: none;
+    }
+    .select-city, .select-calendar {
+        width: 90%;
+        margin: 10px 0;
+        height: 25px;
+    }
+    .button-find {
+        width: 92%;
+    }
+    .example-car > div {
+        width: 45%;
+    }
+    .logo {
+        background: url("./img/smallogo.png") 50% 100% no-repeat;
+    }
+    .city-value {
+        width: 92%;
+    }
+}
+@media (max-width: 370px) {
+    .widget-main {
+        margin: 20px 5px;
+    }
+    h2 {
+        width: 60%;
+    }
+    .example-car > div:nth-child(3) {
+        display: none;
+    }
+    .select-city, .select-calendar {
+        width: 95%;
+        margin: 10px 0;
+    }
+    .button-find {
+        width: 97%;
+        margin-top: 5px;
+    }
+    .example-car > div {
+        width: 70%;
+    }
+    .example-car {
+        padding-left: 15%;
+    }
+    .logo {
+        background: url("./img/smallogo.png") 90% 100% no-repeat;
+    }
+    .city-value {
+        width: 97%
+    }
+}
+@media (max-width: 320px) {
+    h2 {
+        width: 38%;
+    }
+}
+@media (max-width: 250px) {
+    .example-car {
+        padding-left: 0;
+    }
+    .example-car > div {
+        width: 95%;
+    }
+
+    .border-form {
+        border: none;
+    }
 }

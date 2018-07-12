@@ -6,15 +6,16 @@ class City extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
+    //TODO e=> event
     handleClick = (e) => {
-        return (e.props.data.city);
+        return (e.props.city.city);
     };
     render() {
-        let city = this.props.data.city;
+        let city = this.props.city.city;
 
         return (
                 <p onClick={(() => {
-                    this.props.updateData(this.handleClick(this));
+                    this.props.updateCurrentCity(this.handleClick(this));
                 })}>{city}</p>
         );
     }

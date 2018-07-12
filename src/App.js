@@ -114,7 +114,7 @@ class App extends Component {
     }
     render() {
         return (
-            <View data={this.state.cities} cars={this.state.cars}/>
+            <View cities={this.state.cities} cars={this.state.cars}/>
         );
     }
 
