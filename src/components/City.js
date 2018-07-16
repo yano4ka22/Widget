@@ -6,10 +6,11 @@ class City extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
-    //TODO e=> event
-    handleClick = (e) => {
-        return (e.props.city.city);
+
+    handleClick = (event) => {
+        return (event.props.city.city);
     };
+
     render() {
         let city = this.props.city.city;
 

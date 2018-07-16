@@ -77,6 +77,9 @@ h2, .h2 {
     background-color: white;
     border-radius: 3px;
 }
+.calendar-value .fragment {
+    height: auto;
+}
 .fragment::-webkit-scrollbar {
     width: 5px;
 }
@@ -162,7 +165,38 @@ h2, .h2 {
     font-size: 16px;
     font-family: sans-serif;
 }
-
+.calendar-value .inner {
+    display: inline-block;
+    text-align: center;
+    margin-left: 1%;
+    width: 49%;
+}
+.calendar-value .inner:nth-child(2){
+    float: right;
+}
+.nameMonth {
+    display: inline-block;
+    width: 50%;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.r-row, .week-row {
+    display: table-row;
+}
+.week-row .r-cell {
+    padding-right: 8px;
+    font-size: 11px;
+}
+.r-cell {
+    display: table-cell;
+    padding: 4px;
+    color: #c0c0c0;
+    font-size: 13px;
+}
+.r-cell:hover {
+    color: white;
+    background-color: #49ffb9;
+}
 @media (max-width: 940px) {
     .widget-main {
         width: 100%;

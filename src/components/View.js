@@ -12,11 +12,10 @@ class View extends Component {
                 <Example cars={item}/>
             </div>
         );
-        //TODO headForm переименовать
         return (
             <div className={'border-form'}>
                 <div className={'widget-main'}>
-                    <div className="headForm">
+                    <div className="head-form">
                         <div className="float-right logo"/>
                         <h2>Прокат автомобилей</h2>
                     </div>

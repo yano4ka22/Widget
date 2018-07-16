@@ -18,15 +18,14 @@ class Form extends Component {
     }
 
     showHide(name, isDisabled){
-        console.log(isDisabled);
         this.setState(() => ({
             [name]: !isDisabled
         }));
     }
-    //TODO value переименовать
-    updateCurrentCity(value) {
+
+    updateCurrentCity(newCity) {
         this.setState({
-            currentCity: value
+            currentCity: newCity
         });
     }
 
