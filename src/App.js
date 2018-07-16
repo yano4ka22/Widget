@@ -43,8 +43,8 @@ let my_cars = [
         oldPriceDay: '3 000',
         priceDay: '2 800'
     },
-];
-let my_cities = [
+],
+    my_cities = [
     {
         city: 'Абакан'
     },
@@ -102,19 +102,31 @@ let my_cities = [
     {
         city: 'Копейск'
     }
-];
+],
+    title_widget = [
+        {
+            title: 'Прокат автомобилей'
+        },
+        {
+            title: 'Аренда автомобилей в Черногории'
+        },
+        {
+            title: 'Аренда автомобилей'
+        }
+    ];
 
 class App extends Component {
     constructor(props){
         super(props);
         this.state = {
             cities: my_cities,
-            cars: my_cars
+            cars: my_cars,
+            title: title_widget
         }
     }
     render() {
         return (
-            <View cities={this.state.cities} cars={this.state.cars}/>
+            <View cities={this.state.cities} cars={this.state.cars} title={this.state.title}/>
         );
     }
 

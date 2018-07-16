@@ -57,7 +57,7 @@ h2, .h2 {
     padding: 1%;
     border: 0;
     border-radius: 5px;
-    box-shadow: 0 0 15px 2px rgba(221, 221, 221, 1);
+    box-shadow: 0 0 50px 2px rgba(221, 221, 221, 1);
 }
 .select-calendar {
     margin: 0 2%;
@@ -100,6 +100,7 @@ h2, .h2 {
     color: #49ffb9;
 }
 .calendar-value {
+    width: 43%;
     left: 42%;
 }
 .none {
@@ -168,8 +169,8 @@ h2, .h2 {
 .calendar-value .inner {
     display: inline-block;
     text-align: center;
-    margin-left: 1%;
-    width: 49%;
+    margin-left: 3%;
+    width: 47%;
 }
 .calendar-value .inner:nth-child(2){
     float: right;
@@ -184,18 +185,37 @@ h2, .h2 {
     display: table-row;
 }
 .week-row .r-cell {
-    padding-right: 8px;
+    padding-right: 10px;
     font-size: 11px;
 }
 .r-cell {
     display: table-cell;
+    width: 2%;
     padding: 4px;
     color: #c0c0c0;
     font-size: 13px;
 }
+.r-row .cell-none:hover,.week-row .r-cell:hover{
+    background-color: white;
+}
+.active-cell {
+    color: #1e272c;
+}
 .r-cell:hover {
     color: white;
     background-color: #49ffb9;
+}
+.arrow-left, .arrow-right {
+    display: inline;
+    margin-top: 7px;
+    color: #c0c0c0;
+}
+.arrow-left {
+    float: left;
+}
+.arrow-right {
+    float: right;
+    padding-right: 15px;
 }
 @media (max-width: 940px) {
     .widget-main {
@@ -219,8 +239,20 @@ h2, .h2 {
     .example-car > div {
         width: 32%;
     }
-    .city-value {
+    .city-value, .calendar-value {
         width: 35%;
+    }
+    .calendar-value {
+        left: 37%;
+    }
+    .calendar-value .inner{
+        width: 95%;
+        margin-left: 3%;
+    }
+    .week-row .r-cell {
+        width: 8%;
+    }.r-cell {
+        width: 5%;
     }
 }
 @media (max-width: 560px) {
@@ -246,6 +278,10 @@ h2, .h2 {
     }
     .city-value {
         width: 92%;
+    }
+    .calendar-value {
+        width: 60%;
+        left: 0;
     }
 }
 @media (max-width: 370px) {
@@ -275,7 +311,7 @@ h2, .h2 {
     .logo {
         background: url("./img/smallogo.png") 90% 100% no-repeat;
     }
-    .city-value {
+    .city-value,.calendar-value {
         width: 97%
     }
 }

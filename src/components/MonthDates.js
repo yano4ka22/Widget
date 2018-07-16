@@ -14,13 +14,15 @@ class MonthDates extends Component {
             daysInMonth = this.props.getDaysCount(startDay),
             first = startDay.getDay(),
             day = startDay.getUTCDay(),
-            d, isDate;
+            self = this,
+            d, isDate, isActive;
 
         day = startDay.getDate() + 1 - first;
         while (day > 1) {
             day -= 7;
         }
         day -= 1;
+
         return (
             <div>
                 {haystack.map(function (item, index) {
@@ -30,11 +32,15 @@ class MonthDates extends Component {
                             {weekStack.map(function (item, index) {
                                 d += 1;
                                 isDate = d > 0 && d <= daysInMonth;
-
+                                isActive = new Date(self.props.year, self.props.month, d).getTime() >= self.props.today.getTime();
+                                console.log(self.props.today);
                                 if(isDate) {
+                                    if(isActive){
+                                        return <div className="r-cell active-cell" key={index}>{d}</div>
+                                    }
                                     return <div className="r-cell" key={index}>{d}</div>
                                 }
-                                return <div className="r-cell" key={index} />
+                                return <div className="r-cell cell-none" key={index} />
                             })}
                         </div>
                     )

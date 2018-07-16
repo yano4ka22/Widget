@@ -9,12 +9,16 @@ class Form extends Component {
             cityIsDisabled: true,
             calendarIsDisabled: true,
             currentCity: "Черногория",
+            wrapperRefCalendar: '',
             wrapperRef: ''
         };
         this.showHide = this.showHide.bind(this);
         this.updateCurrentCity = this.updateCurrentCity.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
         this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutsideCalendar = this.handleClickOutsideCalendar.bind(this);
+        this.isOutsideCalendar = this.isOutsideCalendar.bind(this);
+        this.setWrapperRefCalendar = this.setWrapperRefCalendar.bind(this);
     }
 
     showHide(name, isDisabled){
@@ -45,6 +49,22 @@ class Form extends Component {
         this.wrapperRef = node;
     }
 
+    handleClickOutsideCalendar(event){
+        if (this.isOutsideCalendar(event)) {
+            this.setState(() => ({
+                calendarIsDisabled: !this.state.calendarIsDisabled
+            }));
+        }
+    }
+
+    isOutsideCalendar(event) {
+        return this.wrapperRefCalendar && !this.wrapperRefCalendar.contains(event.target) && !this.state.calendarIsDisabled;
+    }
+
+    setWrapperRefCalendar(node) {
+        this.wrapperRefCalendar = node;
+    }
+
     render() {
         let redirectUrl = "https://myrentacar.com/#!sochi/170718/250718";
 
@@ -62,7 +82,10 @@ class Form extends Component {
                     />
                     <DateSelection
                         calendarIsDisabled={this.state.calendarIsDisabled}
+                        width={this.props.width}
                         showHide={this.showHide}
+                        handleClickOutsideCalendar={this.handleClickOutsideCalendar}
+                        setWrapperRefCalendar={this.setWrapperRefCalendar}
                     />
                     <button className={"button-find"}>Найти</button>
                 </form>
