@@ -39,6 +39,7 @@ class View extends Component {
 
                     <Form
                         cities={this.props.cities}
+                        translit={this.props.translit}
                         width={this.state.width}
                     />
 

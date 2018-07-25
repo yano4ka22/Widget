@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import HeaderCalendar from './HeaderCalendar'
-import WeekDays from './WeekDays'
-import MonthDates from './MonthDates'
-import SelectedRange from './SelectedRange'
+import Calendar from './Calendar'
+import SelectedDate from './SelectedDate'
 
 class DateSelection extends Component {
     constructor(props){
@@ -20,6 +18,8 @@ class DateSelection extends Component {
         this.getPrev = this.getPrev.bind(this);
         this.getNext = this.getNext.bind(this);
     }
+
+
     componentDidMount() {
         window.addEventListener('mousedown', this.props.handleClickOutsideCalendar);
     }
@@ -44,13 +44,13 @@ class DateSelection extends Component {
     }
 
     render() {
-        let self = this;
 
         //todo посмотреть варианты решения calendarIsDisabled
-        //todo cursor pointer
         return (
             <div className="container-select-calendar" ref={this.props.setWrapperRefCalendar}>
-                <SelectedRange
+                <SelectedDate
+                    from={this.props.from}
+                    to={this.props.to}
                     selectedDay={this.state.selectedDay}
                     selectedMonth={this.state.selectedMonth}
                     selectedYear={this.state.selectedYear}
@@ -60,58 +60,23 @@ class DateSelection extends Component {
                 />
                 {
                     this.props.calendarIsDisabled ? null :
-                        <div className={"calendar-value"}>
-                            <div className="fragment">
-                                <div className="inner">
-                                    {
-                                        self.props.width < "940" ?
-                                            <HeaderCalendar
-                                                month={this.state.monthNames[this.state.month]}
-                                                getPrev={this.getPrev}
-                                                getNext={this.getNext}
-                                            />
-                                            : <HeaderCalendar
-                                                month={this.state.monthNames[this.state.month]}
-                                                getPrev={this.getPrev}
-                                                getNext={this.getNext}
-                                                isExcessArrowRight={true}
-                                            />
-                                    }
+                        <Calendar
+                            date={this.state.date}
+                            width={this.props.width}
+                            month={this.state.month}
+                            selectedDay={this.state.selectedDay}
+                            selectedMonth={this.state.selectedMonth}
+                            selectedYear={this.state.selectedYear}
+                            getDaysCount={DateSelection.getDaysCount}
+                            monthNames={this.state.monthNames}
+                            dayNames={this.state.dayNames}
+                            getPrev={this.getPrev}
+                            getNext={this.getNext}
+                            from={this.props.from}
+                            to={this.props.to}
+                            updateCurrentRange={this.props.updateCurrentRange}
+                        />
 
-                                    <WeekDays
-                                        dayNames={this.state.dayNames}
-                                    />
-                                    <MonthDates
-                                        today={new Date(this.state.selectedYear, this.state.selectedMonth, this.state.selectedDay)}
-                                        month={this.state.month}
-                                        year = {this.state.date.getFullYear()}
-                                        getDaysCount={DateSelection.getDaysCount}
-                                    />
-                                </div>
-                                {
-                                    this.props.width < "940" ? null :
-                                        <div className="inner">
-                                            <HeaderCalendar
-                                                month={this.state.monthNames[this.state.month + 1]}
-                                                width={this.props.width}
-                                                getPrev={this.getPrev}
-                                                getNext={this.getNext}
-                                                isExcessArrowLeft={true}
-                                            />
-                                            <WeekDays
-                                                dayNames={this.state.dayNames}
-                                            />
-                                            <MonthDates
-                                                today={this.state.date}
-                                                month={this.state.month + 1}
-                                                year = {this.state.date.getFullYear()}
-                                                getDaysCount={DateSelection.getDaysCount}
-                                            />
-                                        </div>
-                                }
-
-                            </div>
-                        </div>
                 }
             </div>
         );

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 class HeaderCalendar extends Component {
+    isExcessArrowLeft;
+    isExcessArrowRight;
 
 
     render() {
