@@ -7,25 +7,20 @@ class Example  extends Component {
     }
 
     render() {
-        let name = this.props.cars.name,
-            img = this.props.cars.image,
-            options = this.props.cars.options,
-            price = this.props.cars.price,
-            oldPriceDay = this.props.cars.oldPriceDay,
-            priceDay = this.props.cars.priceDay;
+        const {cars} = this.props;
 
         return (
             <div className="itemCar">
-                <img src={this.getUrl(img)} alt="Логотип"/>
+                <img src={this.getUrl(cars.image)} alt="Логотип"/>
                 <div className="description">
                     <div className="h2">
-                        {name}
+                        {cars.name}
                     </div>
-                    <p>{options}</p>
-                    <div className="price">{price} ₽</div>
+                    <p>{cars.options}</p>
+                    <div className="price">{cars.price} ₽</div>
                     <div>
-                        <span className={"oldPrice"}>{oldPriceDay}</span>
-                        <span className={"priceDay"}> {priceDay} ₽ в день</span>
+                        <span className={"oldPrice"}>{cars.oldPriceDay}</span>
+                        <span className={"priceDay"}> {cars.priceDay} ₽ в день</span>
                     </div>
                 </div>
             </div>

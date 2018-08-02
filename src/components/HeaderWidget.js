@@ -3,17 +3,15 @@ import React, {Component} from 'react';
 class HeaderWidget extends Component {
 
     render() {
-        const maxWidth = "940",
-            middleWidth = "560";
-        let keys = Object.keys(this.props.title);
-
+        const {width, maxWidth, middleWidth, title} = this.props;
+        let keys = Object.keys(title);
         return (
             <div className="head-form">
                 <div className="float-right logo"/>
                 <h2>
-                    { (this.props.width > maxWidth) && this.props.title[keys[0]].title }
-                    { (this.props.width < maxWidth && this.props.width > middleWidth ) && this.props.title[keys[1]].title }
-                    { this.props.width < middleWidth && this.props.title[keys[2]].title }
+                    { (width > maxWidth) && title[keys[0]].title }
+                    { (width < maxWidth && width > middleWidth ) && title[keys[1]].title }
+                    { width < middleWidth && title[keys[2]].title }
                 </h2>
             </div>
         );

@@ -1,13 +1,6 @@
 import React, {Component} from 'react';
 
 class SelectedDate extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            dateFrom: null,
-            dateTo: null
-        };
-    }
 
     createInitialInterval() {
         return this.props.selectedDay + " - " + (this.props.selectedDay + 2) + " " +
@@ -18,22 +11,22 @@ class SelectedDate extends Component {
         return this.props.to.getDate() + " " + this.props.monthNamesCase[this.props.to.getMonth()] + " " + this.props.to.getFullYear();
     }
 
+//TODO this.props.from добавить проверку на тип
     render() {
+        const { monthNamesCase, from, to, showHide, calendarIsDisabled } = this.props;
 
         let initialValue = this.createInitialInterval();
 
         return (
             <div className={"select-calendar"}
-                        onClick={this.props.showHide.bind(this, "calendarIsDisabled", this.props.calendarIsDisabled)}>
-                {(this.props.from) ?
-                    //todo Что за фигня?
-                    this.props.from.getDate() + " " :
-                    initialValue
+                        onClick={showHide.bind(this, "calendarIsDisabled",calendarIsDisabled)}>
+                {(from) ?
+                    from.getDate() + " " : initialValue
                 }
-                {(this.props.to && this.props.from.getMonth() !== this.props.to.getMonth()) &&
-                    this.props.monthNamesCase[this.props.from.getMonth()]
+                {(to && from.getMonth() !== to.getMonth()) &&
+                    monthNamesCase[from.getMonth()]
                 }
-                {(this.props.to) && (
+                {(to) && (
                     (" - " + this.createFiniteInterval()))
                 }
             </div>

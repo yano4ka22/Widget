@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import DateSelection from './DateSelection';
-import SelectedLocation from './SelectedLocation';
+import DateSelection from './calendar/DateSelection';
+import SelectedLocation from './location/SelectedLocation';
 
 class Form extends Component {
     constructor(props){
@@ -15,8 +15,8 @@ class Form extends Component {
             from: null,
             to: null,
             isRange: false,
-            isDateFromForUrl: "",
-            isDateToForUrl: ""
+            urlDateFrom: "",
+            urlDateTo: ""
         };
         this.showHide = this.showHide.bind(this);
         this.updateCurrentCity = this.updateCurrentCity.bind(this);
@@ -43,23 +43,23 @@ class Form extends Component {
     }
 
     showHide(name, isDisabled){
-        this.setState(() => ({
+        this.setState({
             [name]: !isDisabled
-        }));
+        });
     }
 
-    updateCurrentCity(newCity, idCity) {
+    updateCurrentCity(idCity) {
         this.setState({
-            currentCity: newCity,
+            currentCity: this.props.cities[idCity - 1].city,
             currentCityId: idCity
         });
     }
 
     handleClickOutside(event){
         if (this.isOutside(event)) {
-            this.setState(() => ({
+            this.setState({
                 cityIsDisabled: !this.state.cityIsDisabled
-            }));
+            });
         }
     }
 
@@ -87,22 +87,22 @@ class Form extends Component {
         this.wrapperRefCalendar = node;
     }
 
-    updateCurrentRange(newDay, newMonth, newYear) {
-        let newDate = new Date(newYear, newMonth, newDay);
+    updateCurrentRange(day, month, year) {
+        let newDate = new Date(year, month, day);
 
         if(!this.state.isRange){
-            this.setState(() => ({
+            this.setState({
                 from: newDate,
                 isRange: true
-            }));
+            });
         } else {
-            this.setState(() => ({
+            this.setState({
                 to: newDate,
                 isRange: false
-            }));
+            });
         }
     }
-
+//TODO toLocaleString
     makeDateUrl = date => {
         let newDate = (date) ? date : new Date(),
             result = newDate.getDate();
@@ -110,29 +110,30 @@ class Form extends Component {
         result += (newDate.getFullYear().toString().substr(-2));
 
         if(!this.state.isRange){
-            this.setState(state => state.isDateFromForUrl === result ? null : ({
-                isDateFromForUrl: result
+            this.setState(state => state.urlDateFrom === result ? null : ({
+                urlDateFrom: result
             }));
         } else {
-            this.setState(state => state.isDateToForUrl === result ? null : ({
-                isDateToForUrl: result
+            this.setState(state => state.urlDateTo === result ? null : ({
+                urlDateTo: result
             }));
         }
 
     };
 
     render() {
+        const { translit, cities, width, maxWidth } = this.props;
 
-        let redirectUrl = "https://myrentacar.com/#!" + this.props.translit[this.state.currentCityId-1].city + "/"
-            + this.state.isDateFromForUrl + "/" + this.state.isDateToForUrl;
+        //TODO вынести в отдельный компонент
+        let redirectUrl = "https://myrentacar.com/#!" + translit[this.state.currentCityId-1].city + "/"
+            + this.state.urlDateFrom + "/" + this.state.urlDateTo;
 
         return (
             <div className="form-cars">
                 <form action={redirectUrl} method="post">
                     <SelectedLocation
-                        cities={this.props.cities}
+                        cities={cities}
                         currentCity={this.state.currentCity}
-                        currentCityId={this.state.currentCityId}
                         cityIsDisabled={this.state.cityIsDisabled}
                         showHide={this.showHide}
                         updateCurrentCity={this.updateCurrentCity}
@@ -141,7 +142,8 @@ class Form extends Component {
                     />
                     <DateSelection
                         calendarIsDisabled={this.state.calendarIsDisabled}
-                        width={this.props.width}
+                        width={width}
+                        maxWidth={maxWidth}
                         from={this.state.from}
                         to={this.state.to}
                         showHide={this.showHide}

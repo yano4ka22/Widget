@@ -4,12 +4,11 @@ import Example from './Example';
 import HeaderWidget from './HeaderWidget';
 
 class View extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            width: window.innerWidth
-        }
-    }
+    state = {
+        width: window.innerWidth,
+        maxWidth: 940,
+        middleWidth: 560
+    };
 
     componentDidMount() {
         window.addEventListener("resize", this.resize.bind(this));
@@ -21,7 +20,7 @@ class View extends Component {
     }
 
     render() {
-        let cars = this.props.cars;
+        const {cars, title, cities, translit} = this.props;
 
         let carsTemplate = cars.map((item, index) =>
             <div key={index}>
@@ -32,15 +31,18 @@ class View extends Component {
             <div className={'border-form'}>
                 <div className={'widget-main'}>
                     <HeaderWidget
-                        title={this.props.title}
+                        title={title}
                         width={this.state.width}
+                        maxWidth={this.state.maxWidth}
+                        middleWidth={this.state.middleWidth}
                     />
                     <div className="clearfix"/>
 
                     <Form
-                        cities={this.props.cities}
-                        translit={this.props.translit}
+                        cities={cities}
+                        translit={translit}
                         width={this.state.width}
+                        maxWidth={this.state.maxWidth}
                     />
 
                     <div className="example-car">
