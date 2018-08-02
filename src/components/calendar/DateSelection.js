@@ -19,7 +19,6 @@ class DateSelection extends Component {
         this.getNext = this.getNext.bind(this);
     }
 
-
     componentDidMount() {
         window.addEventListener('mousedown', this.props.handleClickOutsideCalendar);
     }
@@ -27,56 +26,52 @@ class DateSelection extends Component {
         window.removeEventListener('mousedown', this.props.handleClickOutsideCalendar);
     }
 
-    static getDaysCount(date) {
-        return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-    }
-
     getPrev(){
-        this.setState(() => ({
+        this.setState({
             month: this.state.month - 1
-        }));
+        });
     }
 
     getNext(){
-        this.setState(() => ({
+        this.setState({
             month: this.state.month + 1
-        }));
+        });
     }
 
     render() {
+        const { width, maxWidth, from, to, showHide, calendarIsDisabled, updateCurrentRange, setWrapperRefCalendar } = this.props;
 
         //todo посмотреть варианты решения calendarIsDisabled
         return (
-            <div className="container-select-calendar" ref={this.props.setWrapperRefCalendar}>
+            <div className="container-select-calendar" ref={setWrapperRefCalendar}>
                 <SelectedDate
-                    from={this.props.from}
-                    to={this.props.to}
+                    from={from}
+                    to={to}
                     selectedDay={this.state.selectedDay}
                     selectedMonth={this.state.selectedMonth}
                     selectedYear={this.state.selectedYear}
-                    showHide={this.props.showHide}
-                    calendarIsDisabled={this.props.calendarIsDisabled}
+                    showHide={showHide}
+                    calendarIsDisabled={calendarIsDisabled}
                     monthNamesCase={this.state.monthNamesCase}
                 />
                 {
-                    this.props.calendarIsDisabled ? null :
+                    calendarIsDisabled ? null :
                         <Calendar
                             date={this.state.date}
-                            width={this.props.width}
+                            width={width}
+                            maxWidth={maxWidth}
                             month={this.state.month}
                             selectedDay={this.state.selectedDay}
                             selectedMonth={this.state.selectedMonth}
                             selectedYear={this.state.selectedYear}
-                            getDaysCount={DateSelection.getDaysCount}
                             monthNames={this.state.monthNames}
                             dayNames={this.state.dayNames}
                             getPrev={this.getPrev}
                             getNext={this.getNext}
-                            from={this.props.from}
-                            to={this.props.to}
-                            updateCurrentRange={this.props.updateCurrentRange}
+                            from={from}
+                            to={to}
+                            updateCurrentRange={updateCurrentRange}
                         />
-
                 }
             </div>
         );

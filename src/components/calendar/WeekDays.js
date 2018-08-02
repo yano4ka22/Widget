@@ -5,6 +5,7 @@ class WeekDays extends Component {
     render() {
         let haystack = Array.apply(null, {length:7}).map(Number.call, Number),
             self = this;
+
         return (
             <div className="week-row">
                 {haystack.map(function (item, i) {

@@ -10,23 +10,24 @@ class SelectedLocation extends Component {
     }
 
     render() {
-        let cities = this.props.cities;
+        const { cities, updateCurrentCity, setWrapperRef, cityIsDisabled, showHide, currentCity } = this.props;
+
         let citiesTemplate = cities.map((item, index) =>
             <div key={index}>
-                <City city={item} updateCurrentCity={this.props.updateCurrentCity}/>
+                <City cities={item} updateCurrentCity={updateCurrentCity}/>
             </div>
         );
 
         return (
-            <div className={"container-select-city"} ref={this.props.setWrapperRef}>
+            <div className={"container-select-city"} ref={setWrapperRef}>
                 <div className={"select-city"}
-                     onClick={this.props.showHide.bind(this, "cityIsDisabled", this.props.cityIsDisabled)}
+                     onClick={showHide.bind(this, "cityIsDisabled", cityIsDisabled)}
                 >
-                    <div className={(this.props.cityIsDisabled ? "down" : "up")}/>
-                    {this.props.currentCity}
+                    <div className={(cityIsDisabled ? "down" : "up")}/>
+                    {currentCity}
                 </div>
                 {
-                    this.props.cityIsDisabled ? null :
+                    cityIsDisabled ? null :
                         <div className={"city-value"} >
                             <div className="fragment">
                                 {citiesTemplate}

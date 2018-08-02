@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {getDaysCount} from './getDaysCount'
 
 class MonthDates extends Component {
     constructor(props){
@@ -26,10 +27,12 @@ class MonthDates extends Component {
     }
 
     render() {
+        const { year, month, today, updateCurrentRange } = this.props;
+
         let weekStack = Array.apply(null, {length: 7}).map(Number.call, Number),
             haystack = Array.apply(null, {length: 6}).map(Number.call, Number),
-            startDay = new Date(this.props.year, this.props.month, 1),
-            daysInMonth = this.props.getDaysCount(startDay),
+            startDay = new Date(year, month, 1),
+            daysInMonth = getDaysCount(startDay),
             first = startDay.getDay(),
             day = startDay.getUTCDay(),
             self = this,
@@ -50,13 +53,13 @@ class MonthDates extends Component {
                             {weekStack.map(function (item, index) {
                                 currentDay += 1;
                                 isDate = currentDay > 0 && currentDay <= daysInMonth;
-                                isActive = new Date(self.props.year, self.props.month, currentDay).getTime() >= self.props.today.getTime();
+                                isActive = new Date(year, month, currentDay).getTime() >= today.getTime();
 
                                 if(isDate) {
                                     if(isActive){
-                                        return <div className={self.classActiveName(currentDay, self.props.month, self.props.year)}
+                                        return <div className={self.classActiveName(currentDay, month, year)}
                                                     key={index}
-                                                    onClick={self.props.updateCurrentRange.bind(this, currentDay, self.props.month, self.props.year)}
+                                                    onClick={updateCurrentRange.bind(this, currentDay, month, year)}
                                                 >{currentDay}</div>
                                     }
                                     return <div className="r-cell" key={index}>{currentDay}</div>
