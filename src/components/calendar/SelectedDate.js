@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class SelectedDate extends Component {
 
@@ -11,7 +12,6 @@ class SelectedDate extends Component {
         return this.props.to.getDate() + " " + this.props.monthNamesCase[this.props.to.getMonth()] + " " + this.props.to.getFullYear();
     }
 
-//TODO this.props.from добавить проверку на тип
     render() {
         const { monthNamesCase, from, to, showHide, calendarIsDisabled } = this.props;
 
@@ -34,3 +34,7 @@ class SelectedDate extends Component {
     }
 }
 export default SelectedDate;
+
+SelectedDate.propTypes = {
+    PropTypes: PropTypes.instanceOf(Date)
+};

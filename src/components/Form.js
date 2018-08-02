@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DateSelection from './calendar/DateSelection';
 import SelectedLocation from './location/SelectedLocation';
+import {redirectUrl} from './redirectData';
 
 class Form extends Component {
     constructor(props){
@@ -73,9 +74,9 @@ class Form extends Component {
 
     handleClickOutsideCalendar(event){
         if (this.isOutsideCalendar(event)) {
-            this.setState(() => ({
+            this.setState({
                 calendarIsDisabled: !this.state.calendarIsDisabled
-            }));
+            });
         }
     }
 
@@ -102,10 +103,11 @@ class Form extends Component {
             });
         }
     }
-//TODO toLocaleString
+
     makeDateUrl = date => {
         let newDate = (date) ? date : new Date(),
             result = newDate.getDate();
+
         result += (newDate.getMonth() < 10) ? '0' + (newDate.getMonth() + 1) : '' + (newDate.getMonth() + 1);
         result += (newDate.getFullYear().toString().substr(-2));
 
@@ -123,14 +125,11 @@ class Form extends Component {
 
     render() {
         const { translit, cities, width, maxWidth } = this.props;
-
-        //TODO вынести в отдельный компонент
-        let redirectUrl = "https://myrentacar.com/#!" + translit[this.state.currentCityId-1].city + "/"
-            + this.state.urlDateFrom + "/" + this.state.urlDateTo;
+        let redirectUrlResult = redirectUrl(translit[this.state.currentCityId-1].city, this.state.urlDateFrom, this.state.urlDateTo);
 
         return (
             <div className="form-cars">
-                <form action={redirectUrl} method="post">
+                <form action={redirectUrlResult} method="post">
                     <SelectedLocation
                         cities={cities}
                         currentCity={this.state.currentCity}
